@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
+    <servlet>
+        <description>JAX-WS endpoint</description>
+        <display-name>WSServlet</display-name>
+        <servlet-name>WSServlet</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WSServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+    <!--<login-config>-->
+        <!--<auth-method>BASIC</auth-method>-->
+    <!--</login-config>-->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/signin.jsp</form-login-page>
+            <form-error-page>/Errorlogin.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>manager</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>customer</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>manager</web-resource-name>
+            <url-pattern>/manager.jsp</url-pattern>
+            <url-pattern>/managerhomepage</url-pattern>
+            <url-pattern>/LogInServlet</url-pattern>
+            <!--<url-pattern>/signin.jsp</url-pattern>-->
+            <!--<url-pattern>/home.jsp</url-pattern>-->
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint><role-name>manager</role-name></auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin</web-resource-name>
+            <url-pattern>/addflight.jsp</url-pattern>
+            <url-pattern>/update.jsp</url-pattern>
+            <url-pattern>/LogInServlet</url-pattern>
+            <!--<url-pattern>/signin.jsp</url-pattern>-->
+            <!--<url-pattern>/home.jsp</url-pattern>-->
+            <url-pattern>/AddFlightServlet</url-pattern>
+            <url-pattern>/updatepage</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint><role-name>admin</role-name></auth-constraint>
+    </security-constraint>
+    <security-constraint>
+
+        <web-resource-collection>
+            <web-resource-name>customer</web-resource-name>
+            <url-pattern>/LogInServlet</url-pattern>
+            <!--<url-pattern>/signin.jsp</url-pattern>-->
+            <!--<url-pattern>/home.jsp</url-pattern>-->
+            <url-pattern>/booking.jsp</url-pattern>
+            <url-pattern>/searchresults.jsp</url-pattern>
+            <url-pattern>/confirmbooking.jsp</url-pattern>
+            <url-pattern>/searchresults</url-pattern>
+            <url-pattern>/sendemail</url-pattern>
+            <url-pattern>/booking</url-pattern>
+            <url-pattern>/confirmbooking</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint><role-name>customer</role-name></auth-constraint>
+    </security-constraint>
+
+
+    <servlet>
+        <servlet-name>ManagerController</servlet-name>
+        <servlet-class>Controllers.ManagerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManagerController</servlet-name>
+        <url-pattern>/managerhomepage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>Controllers.UpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/updatepage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EmailController</servlet-name>
+        <servlet-class>Controllers.EmailController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmailController</servlet-name>
+        <url-pattern>/sendemail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BookingSearchController</servlet-name>
+        <servlet-class>Controllers.BookingSearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookingSearchController</servlet-name>
+        <url-pattern>/searchresults</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BookingController</servlet-name>
+        <servlet-class>Controllers.BookingController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookingController</servlet-name>
+        <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LogInServlet</servlet-name>
+        <servlet-class>Controllers.LogInServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogInServlet</servlet-name>
+        <url-pattern>/LogInServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ConfirmBookingController</servlet-name>
+        <servlet-class>Controllers.ConfirmBookingController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfirmBookingController</servlet-name>
+        <url-pattern>/confirmbooking</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddFlightServlet</servlet-name>
+        <servlet-class>Controllers.AddFlightServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddFlightServlet</servlet-name>
+        <url-pattern>/AddFlightServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignOutServlet</servlet-name>
+        <servlet-class>Controllers.SignOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignOutServlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ValidateEmail</servlet-name>
+        <servlet-class>Controllers.ValidateEmail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ValidateEmail</servlet-name>
+        <url-pattern>/checkemail</url-pattern>
+    </servlet-mapping>
+
+
+
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>haseebahmed675@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>cmpunk434</param-value>
+    </context-param>
+</web-app>

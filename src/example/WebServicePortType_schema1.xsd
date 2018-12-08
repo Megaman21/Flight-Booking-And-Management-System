@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://example/" xmlns:tns="http://example/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getSeatPrice" type="tns:getSeatPrice"/>
+
+  <xs:element name="getSeatPriceResponse" type="tns:getSeatPriceResponse"/>
+
+  <xs:element name="getavailable_seats" type="tns:getavailable_seats"/>
+
+  <xs:element name="getavailable_seatsResponse" type="tns:getavailable_seatsResponse"/>
+
+  <xs:complexType name="getavailable_seats">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getavailable_seatsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSeatPrice">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSeatPriceResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
